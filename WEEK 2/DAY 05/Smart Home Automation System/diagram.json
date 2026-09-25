@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "author": "Sreya V",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-dht22", "id": "dht1", "top": -38.1, "left": 148.2, "attrs": {} },
+    {
+      "type": "wokwi-photoresistor-sensor",
+      "id": "ldr1",
+      "top": 41.6,
+      "left": -239.2,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led1",
+      "top": 104.8,
+      "left": -161.8,
+      "rotate": 270,
+      "attrs": { "color": "white" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 109.55,
+      "left": -105.6,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led2",
+      "top": 143.2,
+      "left": -161.8,
+      "rotate": 270,
+      "attrs": { "color": "blue" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r2",
+      "top": 147.95,
+      "left": -105.6,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-buzzer",
+      "id": "bz1",
+      "top": -103.2,
+      "left": -65.4,
+      "attrs": { "volume": "0.1" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "dht1:VCC", "esp:3V3", "red", [ "v19.2", "h-28.8", "v-105.6", "h-153.6", "v38.4" ] ],
+    [ "dht1:GND", "esp:GND.3", "black", [ "v9.6" ] ],
+    [ "dht1:SDA", "esp:4", "green", [ "v67.2", "h-67.1" ] ],
+    [ "ldr1:VCC", "esp:3V3", "red", [ "h28.8", "v-28.8" ] ],
+    [ "ldr1:GND", "esp:GND.1", "black", [ "h28.8", "v86" ] ],
+    [ "ldr1:AO", "esp:34", "green", [ "h38.4", "v-19.9" ] ],
+    [ "esp:26", "r1:2", "green", [ "h0" ] ],
+    [ "r1:1", "led1:A", "green", [ "v0" ] ],
+    [ "led1:C", "esp:GND.1", "black", [ "h86.4", "v18.8" ] ],
+    [ "led2:A", "r2:1", "green", [ "h0" ] ],
+    [ "r2:2", "esp:27", "green", [ "v0" ] ],
+    [ "led2:C", "esp:GND.1", "black", [ "h96", "v-19.6" ] ],
+    [ "bz1:2", "esp:25", "red", [ "v0" ] ],
+    [ "bz1:1", "esp:GND.1", "black", [ "v0" ] ]
+  ],
+  "dependencies": {}
+}

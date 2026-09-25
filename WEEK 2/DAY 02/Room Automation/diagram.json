@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "author": "Room Automation LED Cathode Fixed",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp32", "top": 100, "left": 200, "attrs": {} },
+    {
+      "type": "wokwi-led",
+      "id": "led1",
+      "top": 48,
+      "left": 60,
+      "attrs": { "color": "blue", "label": "LIGHT" }
+    },
+    { "type": "wokwi-resistor", "id": "r1", "top": 105, "left": 100, "attrs": { "value": "220" } },
+    { "type": "wokwi-a4988", "id": "drv1", "top": 350, "left": 280, "attrs": {} },
+    {
+      "type": "wokwi-stepper-motor",
+      "id": "fan1",
+      "top": -24,
+      "left": 480,
+      "attrs": { "label": "FAN", "display": "steps", "arrow": "orange" }
+    }
+  ],
+  "connections": [
+    [ "esp32:TX0", "$serialMonitor:RX", "", [] ],
+    [ "esp32:RX0", "$serialMonitor:TX", "", [] ],
+    [ "esp32:D23", "r1:2", "blue", [] ],
+    [ "r1:1", "led1:A", "red", [] ],
+    [ "led1:K", "esp32:GND.1", "black", [] ],
+    [ "esp32:D14", "drv1:STEP", "blue", [] ],
+    [ "esp32:D12", "drv1:DIR", "green", [] ],
+    [ "esp32:D27", "drv1:EN", "yellow", [] ],
+    [ "esp32:GND.2", "drv1:GND", "black", [] ],
+    [ "esp32:3V3", "drv1:VDD", "red", [] ],
+    [ "esp32:VIN", "drv1:VMOT", "red", [] ],
+    [ "drv1:RESET", "drv1:SLEEP", "white", [] ],
+    [ "drv1:1B", "fan1:A-", "orange", [] ],
+    [ "drv1:1A", "fan1:A+", "yellow", [] ],
+    [ "drv1:2A", "fan1:B+", "blue", [] ],
+    [ "drv1:2B", "fan1:B-", "purple", [] ],
+	[ "led1:C", "esp32:GND.2", "black", [ "v0" ] ]
+  ],
+  "serialMonitor": { "display": "always" },
+  "dependencies": {}
+}
